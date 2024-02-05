@@ -1,6 +1,4 @@
-import { sql } from "@vercel/postgres";
-
-export interface RootObject {
+export interface InvoicesRes {
   data: Data;
   message: string;
 }
@@ -37,11 +35,15 @@ export enum Status {
   Pending = "pending",
 }
 
-export async function getAllInvoices() {
-  try {
-    const res = await sql`SELECT * FROM invoices`;
-    return { message: "Found Invoices", data: res };
-  } catch (error) {
-    return { message: "Database Error: Failed to retreive invoices" };
-  }
+export interface Products {
+  count: number;
+  data: Product[];
+  message: string;
+}
+
+export interface Product {
+  description: string;
+  id: string;
+  name: string;
+  price: string;
 }
